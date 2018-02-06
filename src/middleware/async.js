@@ -6,6 +6,9 @@ export default ({dispatch}) => {
       return next(action);
     }
 
-    next(action);
+    action.payload.then(Response => {
+      const newAction = {...action, payload: Response.data};
+      dispatch(newAction);
+    });
   }
 }
